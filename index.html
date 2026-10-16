@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>빛나래 AI 콘텐츠 100일 챌린지 | KIKIKI Edu 빛나래샘</title>
+<meta name="description" content="AI가 처음이어도 괜찮아요. 하루 10분, 100일 동안 나만의 콘텐츠를 함께 만들어요. 참가비 무료, 카톡 오픈채팅으로 들어오세요.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="빛나래 AI 콘텐츠 100일 챌린지">
+<meta property="og:description" content="AI가 처음이어도 괜찮아요. 하루 10분, 참가비 무료. 100일 동안 나만의 콘텐츠를 함께 만들어요.">
+<meta property="og:image" content="/images/challenge-poster.webp">
+<meta name="theme-color" content="#3B2785">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233B2785'/%3E%3Cpath d='M16 6l2.6 7.4L26 16l-7.4 2.6L16 26l-2.6-7.4L6 16l7.4-2.6z' fill='%23F2C14E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --paper: #FAF8FD;      /* 라벤더 빛 흰 종이 */
+    --lilac: #ECE5F8;      /* 옅은 라벤더 */
+    --violet: #6A4BC4;     /* 포인트 보라 */
+    --ink: #2B1D63;        /* 포스터 제목의 짙은 남보라 */
+    --text: #3A3550;       /* 본문 */
+    --muted: #6F6886;
+    --star: #F2C14E;       /* 포스터의 별빛 금색 */
+    --kakao: #FEE500;
+    --line: #DCD3EE;
+    --serif: "Gowun Batang", "Nanum Myeongjo", serif;
+    --sans: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--text);
+    font-family: var(--sans); font-size: 17px; line-height: 1.7;
+    word-break: keep-all; overflow-wrap: break-word;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  h1, h2, h3 { font-family: var(--serif); color: var(--ink); font-weight: 700; line-height: 1.35; margin: 0; }
+  h2 { font-size: clamp(1.6rem, 4.6vw, 2.25rem); }
+  h3 { font-size: 1.22rem; }
+  p { margin: 0; }
+
+  /* 버튼 */
+  .btn-kakao {
+    display: inline-flex; align-items: center; justify-content: center; gap: .55em;
+    min-height: 58px; padding: 0 28px; border-radius: 16px;
+    background: var(--kakao); color: #191600; text-decoration: none;
+    font-weight: 700; font-size: 1.08rem; letter-spacing: -.01em;
+    box-shadow: 0 2px 0 #D4BF00;
+    transition: transform .12s ease;
+  }
+  .btn-kakao:active { transform: translateY(2px); box-shadow: none; }
+  .btn-kakao svg { width: 22px; height: 22px; flex: none; }
+
+  /* 머리 */
+  .top { padding: 18px 0; }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .brand { font-weight: 700; color: var(--ink); text-decoration: none; font-size: .98rem; }
+  .brand small { display: block; font-weight: 500; color: var(--muted); font-size: .78rem; }
+  .top-link { font-size: .92rem; font-weight: 600; color: var(--violet); text-decoration: none; padding: 8px 4px; }
+
+  /* 첫 화면 */
+  .hero { padding: 20px 0 56px; }
+  .hero .wrap { display: grid; gap: 36px; align-items: center; }
+  .hero-kicker { font-family: var(--serif); color: var(--violet); font-size: 1.05rem; margin-bottom: 14px; }
+  .hero h1 { font-size: clamp(2rem, 7.4vw, 3.4rem); letter-spacing: -.02em; }
+  .hero h1 .hundred {
+    display: block; font-size: 1.9em; line-height: 1; margin: 6px 0 4px;
+    color: var(--violet); letter-spacing: -.04em;
+  }
+  .hero-lead { margin-top: 18px; font-size: 1.12rem; color: var(--text); max-width: 32em; }
+  .facts { list-style: none; padding: 0; margin: 26px 0 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .facts li {
+    padding: 8px 16px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line);
+    font-weight: 600; color: var(--ink); font-size: .98rem;
+  }
+  .facts li b { color: var(--violet); }
+  .hero-note { margin-top: 14px; font-size: .95rem; color: var(--muted); }
+  .poster {
+    position: relative; max-width: 460px; justify-self: center; width: 100%;
+  }
+  .poster img { border-radius: 22px; box-shadow: 0 24px 50px -24px rgba(59, 39, 133, .45); }
+
+  /* 공통 단락 */
+  section.block { padding: 64px 0; }
+  .lead { margin-top: 14px; color: var(--muted); max-width: 36em; }
+
+  /* 이런 분께 */
+  .who { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .who-list { list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 0; }
+  .who-list li { padding: 20px 0; border-top: 1px solid var(--line); display: grid; gap: 4px; }
+  .who-list li:last-child { border-bottom: 1px solid var(--line); }
+  .who-list strong { font-family: var(--serif); font-size: 1.2rem; color: var(--ink); }
+  .who-list span { color: var(--muted); }
+  .who-foot { margin-top: 24px; font-family: var(--serif); font-size: 1.15rem; color: var(--violet); }
+
+  /* 100칸 출석판 */
+  .board-wrap { display: grid; gap: 40px; margin-top: 36px; align-items: start; }
+  .board {
+    display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px;
+    width: 100%; max-width: 420px; padding: 16px; background: #fff;
+    border: 1.5px solid var(--line); border-radius: 20px;
+  }
+  .board i {
+    aspect-ratio: 1; border-radius: 5px; background: var(--lilac);
+    transition: background-color .25s ease, transform .25s ease;
+  }
+  .board i.on { background: var(--violet); }
+  .board i.today { background: var(--star); transform: scale(1.12); }
+  .board-cap { margin-top: 12px; font-size: .92rem; color: var(--muted); }
+  .steps { list-style: none; padding: 0; margin: 0; counter-reset: s; display: grid; gap: 26px; }
+  .steps li { position: relative; padding-left: 58px; counter-increment: s; }
+  .steps li::before {
+    content: counter(s); position: absolute; left: 0; top: -2px;
+    width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--ink); color: #fff; font-family: var(--serif); font-weight: 700; font-size: 1.1rem;
+  }
+  .steps h3 { margin-bottom: 4px; }
+  .steps p { color: var(--muted); }
+  .steps a { color: var(--violet); font-weight: 600; }
+  .late {
+    margin-top: 32px; padding: 18px 20px; border-radius: 14px; background: var(--lilac);
+    color: var(--ink); font-weight: 600;
+  }
+
+  /* 얻는 것 */
+  .gain { background: var(--ink); color: #E9E3FA; }
+  .gain h2 { color: #fff; }
+  .gain .lead { color: #BFB3E6; }
+  .gain-list { list-style: none; padding: 0; margin: 36px 0 0; display: grid; gap: 30px; }
+  .gain-list li { padding-left: 34px; position: relative; }
+  .gain-list li::before {
+    content: ""; position: absolute; left: 0; top: .45em; width: 18px; height: 18px;
+    background: var(--star);
+    clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  }
+  .gain-list h3 { color: #fff; margin-bottom: 4px; }
+  .gain-cafe { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+  .gain-cafe a {
+    display: inline-flex; align-items: center; min-height: 50px; padding: 0 22px; border-radius: 14px;
+    border: 1.5px solid #7E6CC4; color: #fff; text-decoration: none; font-weight: 600;
+  }
+  .gain-cafe a:hover { background: rgba(255,255,255,.06); }
+  .gain-cafe span { color: #BFB3E6; font-size: .95rem; }
+
+  /* 빛나래샘 */
+  .teacher-photo { margin-top: 32px; border-radius: 20px; overflow: hidden; border: 1.5px solid var(--line); }
+  .cred { display: grid; gap: 28px; margin-top: 36px; }
+  .cred dl { margin: 0; }
+  .cred dt { font-family: var(--serif); font-weight: 700; color: var(--ink); font-size: 1.1rem; margin-bottom: 8px; }
+  .cred dd { margin: 0; color: var(--text); }
+  .cred ul { margin: 0; padding-left: 1.1em; }
+  .cred a { color: var(--violet); font-weight: 600; }
+
+  /* 문의 */
+  .ask { background: #fff; border-top: 1px solid var(--line); }
+  .ask-grid { display: grid; gap: 40px; margin-top: 8px; }
+  .kakao-first { padding: 24px; border-radius: 18px; background: var(--lilac); }
+  .kakao-first p { margin-bottom: 18px; color: var(--ink); font-weight: 600; }
+  form { display: grid; gap: 18px; }
+  label { font-weight: 600; color: var(--ink); display: block; margin-bottom: 6px; }
+  label .opt { font-weight: 400; color: var(--muted); font-size: .9rem; }
+  input[type=text], input[type=tel], textarea {
+    width: 100%; font: inherit; font-size: 17px; color: var(--text);
+    padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--paper);
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--violet); background: #fff; box-shadow: 0 0 0 3px rgba(106,75,196,.18); }
+  textarea { min-height: 120px; resize: vertical; }
+  .consent { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: 12px; background: var(--paper); border: 1.5px solid var(--line); }
+  .consent input { width: 22px; height: 22px; margin-top: 3px; accent-color: var(--violet); flex: none; }
+  .consent label { margin: 0; font-weight: 600; }
+  .consent small { display: block; font-weight: 400; color: var(--muted); font-size: .88rem; line-height: 1.6; margin-top: 4px; }
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .submit {
+    min-height: 56px; border: 0; border-radius: 14px; background: var(--ink); color: #fff;
+    font: inherit; font-weight: 700; font-size: 1.05rem; cursor: pointer;
+  }
+  .submit:disabled { opacity: .6; cursor: progress; }
+  .msg { padding: 14px 16px; border-radius: 12px; font-weight: 600; }
+  .msg.ok { background: #E7F6EC; color: #1D5B33; }
+  .msg.err { background: #FDECEC; color: #8A1F1F; }
+
+  footer { padding: 48px 0 120px; font-size: .92rem; color: var(--muted); }
+  footer .wrap { display: grid; gap: 10px; }
+  footer strong { color: var(--ink); }
+  footer a { color: var(--violet); }
+
+  /* 폰 아래 고정 버튼 */
+  .sticky {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(250, 248, 253, .94); backdrop-filter: blur(8px);
+    border-top: 1px solid var(--line);
+    transform: translateY(110%); transition: transform .3s ease;
+  }
+  .sticky.show { transform: none; }
+  .sticky .btn-kakao { width: 100%; min-height: 54px; }
+
+  @media (min-width: 820px) {
+    body { font-size: 18px; }
+    .hero { padding: 36px 0 88px; }
+    .hero .wrap { grid-template-columns: 1.1fr .9fr; gap: 56px; }
+    .poster { justify-self: end; }
+    section.block { padding: 96px 0; }
+    .who-list { grid-template-columns: repeat(3, 1fr); gap: 0 32px; }
+    .who-list li, .who-list li:last-child { border-bottom: 0; }
+    .board-wrap { grid-template-columns: 420px 1fr; gap: 64px; }
+    .gain-list { grid-template-columns: 1fr 1fr; gap: 36px 56px; }
+    .cred { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .ask-grid { grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: start; }
+    .sticky { display: none; }
+    footer { padding-bottom: 56px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/">KIKIKI Edu 빛나래샘<small>빛나래교육콘텐츠연구소</small></a>
+    <a class="top-link" href="#ask">문의하기</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="hero-kicker">책과 글로 빛나는 꿈을 이루는 AI 교육 콘텐츠</p>
+        <h1>빛나래 AI 콘텐츠<span class="hundred">100일</span>챌린지</h1>
+        <p class="hero-lead">AI가 처음이어도 괜찮아요. 하루 10분, 100일 동안 나만의 콘텐츠를 함께 만들어요.</p>
+        <ul class="facts" aria-label="참여 조건">
+          <li>참가비 <b>무료</b></li>
+          <li>하루 <b>10분</b></li>
+          <li>지금 들어와도 <b>돼요</b></li>
+        </ul>
+        <a class="btn-kakao" href="https://open.kakao.com/o/g4ZCYmUf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.6l-1 3.6c-.1.3.3.6.6.4l4.3-2.8c.5.1.9.1 1.4.1 5.5 0 10-3.5 10-7.9S17.5 3 12 3z"/></svg>
+          카톡 오픈채팅 들어가기
+        </a>
+        <p class="hero-note">참가 신청과 강의 링크는 오픈채팅에서 안내해요.</p>
+      </div>
+      <figure class="poster" style="margin:0">
+        <img src="images/challenge-poster.webp" width="1254" height="1254"
+             alt="빛나래 AI 콘텐츠 100일 챌린지 포스터. 책을 든 빛나래샘 일러스트와 AI 콘텐츠 아이콘">
+      </figure>
+    </div>
+  </section>
+
+  <section class="block who" aria-labelledby="who-h">
+    <div class="wrap">
+      <h2 id="who-h">이런 분과 함께해요</h2>
+      <ul class="who-list">
+        <li><strong>AI가 처음인 직장인</strong><span>퇴근 후 10분, AI로 콘텐츠를 만들어 보고 싶은 분</span></li>
+        <li><strong>1인 사업자·자영업자</strong><span>내 일을 알릴 콘텐츠를 AI로 직접 만들고 싶은 분</span></li>
+        <li><strong>선생님·강사</strong><span>수업 자료와 SNS 콘텐츠를 AI로 만들고 싶은 분</span></li>
+      </ul>
+      <p class="who-foot">AI를 하나도 몰라도 따라올 수 있어요.</p>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="how-h">
+    <div class="wrap">
+      <h2 id="how-h">하루 10분, 한 칸씩 채워요</h2>
+      <p class="lead">100일 동안 매일 조금씩. 이렇게 진행해요.</p>
+      <div class="board-wrap">
+        <div>
+          <div class="board" id="board" role="img" aria-label="100일을 뜻하는 100칸 출석판"></div>
+          <p class="board-cap">하루에 한 칸, 100칸이 채워지면 챌린지 완주예요.</p>
+        </div>
+        <div>
+          <ol class="steps">
+            <li>
+              <h3>카톡 오픈채팅에 들어와요</h3>
+              <p>참가 신청과 강의 링크가 여기서 올라와요.</p>
+            </li>
+            <li>
+              <h3>강의를 보고 하루 10분 만들어요</h3>
+              <p>안내에 따라 AI로 글·그림·영상 같은 콘텐츠를 만들어요.</p>
+            </li>
+            <li>
+              <h3>네이버 카페에 결과물을 올려요</h3>
+              <p><a href="https://cafe.naver.com/kikikibook" target="_blank" rel="noopener">빛나래 네이버 카페</a>에 올리고, 다른 참가자의 결과물도 함께 봐요.</p>
+            </li>
+          </ol>
+          <p class="late">이미 시작했어도 괜찮아요. 지금 들어와서 보고 따라오시면 돼요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block gain" aria-labelledby="gain-h">
+    <div class="wrap">
+      <h2 id="gain-h">100일 뒤에 남는 것</h2>
+      <p class="lead">혼자서는 며칠 만에 멈추던 일을, 함께라서 끝까지 이어 가요.</p>
+      <ul class="gain-list">
+        <li><h3>매일 AI로 만드는 습관</h3><p>하루 10분이면 충분해요. 100일이면 몸에 익어요.</p></li>
+        <li><h3>카페에 쌓인 내 결과물</h3><p>100일 동안 올린 글·그림·영상이 그대로 내 포트폴리오가 돼요.</p></li>
+        <li><h3>직접 만들 수 있는 나</h3><p>업무 자료, 내 가게·서비스 홍보, 수업 자료에 바로 써요.</p></li>
+        <li><h3>함께 걷는 동료</h3><p>오픈채팅과 카페에서 같은 길을 걷는 사람들과 서로 보고 배워요.</p></li>
+      </ul>
+      <div class="gain-cafe">
+        <a href="https://cafe.naver.com/kikikibook" target="_blank" rel="noopener">참가자 결과물 보러 가기</a>
+        <span>참가자들이 올린 결과물과 이야기는 네이버 카페에 있어요.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="t-h">
+    <div class="wrap">
+      <h2 id="t-h">빛나래샘 이숙영</h2>
+      <p class="lead">책과 글로 빛나는 꿈을 만드는 교육 콘텐츠 전문가</p>
+      <div class="teacher-photo">
+        <img src="images/binaraesaem.webp" width="1905" height="1072" loading="lazy"
+             alt="빛나래샘 이숙영 소개 이미지">
+      </div>
+      <div class="cred">
+        <dl>
+          <dt>아동가족 독서융합교육 전문가</dt>
+          <dd><ul><li>한국독서문화교육협회 대표</li><li>호호북앤드림 대표</li><li>빛나래교육콘텐츠연구소 대표</li></ul></dd>
+        </dl>
+        <dl>
+          <dt>주요 자격</dt>
+          <dd><ul><li>정교사 자격증 · 사서 자격증</li><li>NCS 평생교육 강사</li><li>Google 교육전문가 L1 · L2</li><li>Gemini Educator · Gemini Faculty</li></ul></dd>
+        </dl>
+        <dl>
+          <dt>전문 분야</dt>
+          <dd>독서교육 · 글쓰기 · 출판 · AI 교육 콘텐츠<br><br>강의·출판·협업 문의<br><a href="mailto:kikikibook@naver.com">kikikibook@naver.com</a></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="block ask" id="ask" aria-labelledby="ask-h">
+    <div class="wrap">
+      <div class="ask-grid">
+        <div>
+          <h2 id="ask-h">궁금한 게 있으세요?</h2>
+          <p class="lead">들어오기 전에 먼저 물어보셔도 괜찮아요.</p>
+          <div class="kakao-first" style="margin-top:28px">
+            <p>카톡이 편하시면 오픈채팅에서 바로 물어보세요.</p>
+            <a class="btn-kakao" href="https://open.kakao.com/o/g4ZCYmUf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.6l-1 3.6c-.1.3.3.6.6.4l4.3-2.8c.5.1.9.1 1.4.1 5.5 0 10-3.5 10-7.9S17.5 3 12 3z"/></svg>
+              카톡 오픈채팅 들어가기
+            </a>
+          </div>
+        </div>
+
+        <form id="inquiry" novalidate>
+          <div>
+            <label for="f-name">이름</label>
+            <input type="text" id="f-name" name="name" autocomplete="name" maxlength="50" required>
+          </div>
+          <div>
+            <label for="f-contact">연락처 <span class="opt">휴대폰 번호 또는 이메일</span></label>
+            <input type="text" id="f-contact" name="contact" autocomplete="tel" inputmode="text" maxlength="100" required>
+          </div>
+          <div>
+            <label for="f-msg">궁금한 점 <span class="opt">자유롭게 적어 주세요</span></label>
+            <textarea id="f-msg" name="message" maxlength="1000"></textarea>
+          </div>
+          <div class="trap" aria-hidden="true">
+            <label for="f-web">웹사이트</label>
+            <input type="text" id="f-web" name="website" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="consent">
+            <input type="checkbox" id="f-consent" required>
+            <label for="f-consent">개인정보 수집·이용에 동의해요 (필수)
+              <small>수집 항목: 이름, 연락처, 궁금한 점 · 목적: 문의 답변 · 보관: 답변을 마친 뒤 1년 안에 파기해요.</small>
+            </label>
+          </div>
+          <button class="submit" type="submit">문의 보내기</button>
+          <p class="msg" id="f-result" role="status" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>빛나래교육콘텐츠연구소</strong> · KIKIKI Edu 빛나래샘</p>
+    <p>
+      <a href="https://open.kakao.com/o/g4ZCYmUf" target="_blank" rel="noopener">카톡 오픈채팅</a> ·
+      <a href="https://cafe.naver.com/kikikibook" target="_blank" rel="noopener">네이버 카페</a> ·
+      <a href="mailto:kikikibook@naver.com">kikikibook@naver.com</a>
+    </p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <a class="btn-kakao" href="https://open.kakao.com/o/g4ZCYmUf" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.6l-1 3.6c-.1.3.3.6.6.4l4.3-2.8c.5.1.9.1 1.4.1 5.5 0 10-3.5 10-7.9S17.5 3 12 3z"/></svg>
+    카톡 오픈채팅 들어가기 · 참가비 무료
+  </a>
+</div>
+
+<script>
+  // 100칸 출석판: 화면에 보이면 한 칸씩 채워진다
+  (function () {
+    var board = document.getElementById('board');
+    var cells = [];
+    for (var i = 0; i < 100; i++) { var c = document.createElement('i'); board.appendChild(c); cells.push(c); }
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function fill() {
+      if (reduce) { cells.forEach(function (c) { c.classList.add('on'); }); cells[99].classList.add('today'); return; }
+      cells.forEach(function (c, n) {
+        setTimeout(function () { c.classList.add(n === 99 ? 'today' : 'on'); }, n * 14);
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { fill(); io.disconnect(); }
+      }, { threshold: 0.4 });
+      io.observe(board);
+    } else { fill(); }
+  })();
+
+  // 폰 아래 고정 버튼: 첫 화면 버튼이 안 보일 때만
+  (function () {
+    var sticky = document.getElementById('sticky');
+    var heroBtn = document.querySelector('.hero .btn-kakao');
+    var ask = document.getElementById('ask');
+    if (!('IntersectionObserver' in window)) return;
+    var heroVisible = true, askVisible = false;
+    function update() { sticky.classList.toggle('show', !heroVisible && !askVisible); }
+    new IntersectionObserver(function (es) { heroVisible = es[0].isIntersecting; update(); }).observe(heroBtn);
+    new IntersectionObserver(function (es) { askVisible = es[0].isIntersecting; update(); }).observe(ask);
+  })();
+
+  // 문의 보내기
+  (function () {
+    var form = document.getElementById('inquiry');
+    var out = document.getElementById('f-result');
+    var btn = form.querySelector('.submit');
+    function show(text, ok) { out.textContent = text; out.className = 'msg ' + (ok ? 'ok' : 'err'); out.hidden = false; }
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var data = {
+        name: form.name.value.trim(),
+        contact: form.contact.value.trim(),
+        message: form.message.value.trim(),
+        website: form.website.value,
+        consent: document.getElementById('f-consent').checked
+      };
+      if (!data.name || !data.contact) { show('이름과 연락처를 적어 주세요.', false); return; }
+      if (!data.consent) { show('개인정보 수집·이용에 동의해 주세요.', false); return; }
+      btn.disabled = true; btn.textContent = '보내는 중…';
+      try {
+        var r = await fetch('/api/inquiry', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        var j = await r.json().catch(function () { return {}; });
+        if (r.ok && j.ok) { form.reset(); show('문의가 접수됐어요. 확인 후 연락드릴게요.', true); }
+        else { show(j.error || '보내지 못했어요. 잠시 뒤 다시 시도해 주세요.', false); }
+      } catch (err) {
+        show('인터넷 연결을 확인하고 다시 보내 주세요.', false);
+      } finally {
+        btn.disabled = false; btn.textContent = '문의 보내기';
+      }
+    });
+  })();
+</script>
+</body>
+</html>

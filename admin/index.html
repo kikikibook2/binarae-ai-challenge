@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>문의함 | 빛나래 100일 챌린지</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root { --paper:#FAF8FD; --lilac:#ECE5F8; --violet:#6A4BC4; --ink:#2B1D63; --text:#3A3550; --muted:#6F6886; --line:#DCD3EE; --late:#C0392B; }
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin:0; background:var(--paper); color:var(--text); font-family:"Pretendard Variable",Pretendard,-apple-system,"Malgun Gothic",sans-serif; font-size:17px; line-height:1.6; word-break:keep-all; }
+  .wrap { max-width:720px; margin:0 auto; padding:24px 16px 64px; }
+  h1 { font-size:1.3rem; color:var(--ink); margin:0 0 20px; }
+  :focus-visible { outline:3px solid var(--violet); outline-offset:2px; }
+  button { font:inherit; cursor:pointer; }
+  input[type=password] { width:100%; font:inherit; font-size:17px; padding:14px 16px; border-radius:12px; border:1.5px solid var(--line); background:#fff; }
+  .primary { width:100%; min-height:52px; margin-top:12px; border:0; border-radius:12px; background:var(--ink); color:#fff; font-weight:700; }
+  .err { color:var(--late); font-weight:600; margin-top:10px; }
+  .count { display:flex; align-items:baseline; gap:10px; padding:20px; border-radius:16px; background:#fff; border:1.5px solid var(--line); }
+  .count b { font-size:3rem; line-height:1; color:var(--violet); }
+  .count span { font-weight:600; color:var(--ink); }
+  .latebar { margin-top:12px; padding:12px 16px; border-radius:12px; background:#FDECEC; color:var(--late); font-weight:700; }
+  .filters { display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 14px; }
+  .filters button { min-height:44px; padding:0 16px; border-radius:999px; border:1.5px solid var(--line); background:#fff; color:var(--ink); }
+  .filters button[aria-pressed=true] { background:var(--ink); border-color:var(--ink); color:#fff; }
+  .tools { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; color:var(--muted); font-size:.92rem; }
+  .tools button { border:0; background:none; color:var(--violet); font-weight:600; min-height:44px; }
+  .list { display:grid; gap:12px; list-style:none; padding:0; margin:0; }
+  .card { background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:16px; }
+  .card.late { border-color:var(--late); }
+  .meta { font-size:.88rem; color:var(--muted); }
+  .name { font-weight:700; color:var(--ink); font-size:1.1rem; margin:2px 0; }
+  .contact { display:inline-block; border:0; background:var(--lilac); color:var(--ink); padding:6px 12px; border-radius:8px; font-weight:600; min-height:40px; }
+  .msgtext { margin:10px 0 0; white-space:pre-wrap; }
+  .status { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:14px; }
+  .status button { min-height:46px; border-radius:10px; border:1.5px solid var(--line); background:#fff; color:var(--text); font-size:.95rem; }
+  .status button[aria-pressed=true] { background:var(--violet); border-color:var(--violet); color:#fff; font-weight:700; }
+  .empty { padding:32px 16px; text-align:center; color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>빛나래 100일 챌린지 · 문의함</h1>
+
+  <form id="login">
+    <label for="pw" style="display:block;font-weight:600;margin-bottom:8px">관리자 비밀번호</label>
+    <input type="password" id="pw" autocomplete="current-password" required>
+    <button class="primary" type="submit">문의함 열기</button>
+    <p class="err" id="login-err" hidden></p>
+  </form>
+
+  <div id="box" hidden>
+    <div class="count"><b id="new-count">0</b><span>건의 새 문의</span></div>
+    <p class="latebar" id="latebar" hidden></p>
+    <div class="filters" role="group" aria-label="상태별 보기">
+      <button type="button" data-f="새 문의" aria-pressed="false">새 문의</button>
+      <button type="button" data-f="연락함" aria-pressed="false">연락함</button>
+      <button type="button" data-f="완료" aria-pressed="false">완료</button>
+      <button type="button" data-f="" aria-pressed="true">전체</button>
+    </div>
+    <div class="tools"><span id="shown"></span><button type="button" id="reload">새로고침</button></div>
+    <ul class="list" id="list"></ul>
+    <p class="err" id="box-err" hidden></p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var KEY = 'binarae-admin-pw';
+  var STATUSES = ['새 문의', '연락함', '완료'];
+  var rows = [], filter = '';
+  var $ = function (id) { return document.getElementById(id); };
+
+  function getPw() { try { return sessionStorage.getItem(KEY) || ''; } catch (e) { return ''; } }
+  function setPw(v) { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch (e) {} }
+
+  async function api(method, body) {
+    var r = await fetch('/api/admin', {
+      method: method,
+      headers: Object.assign({ 'x-admin-password': getPw() }, body ? { 'Content-Type': 'application/json' } : {}),
+      body: body ? JSON.stringify(body) : undefined
+    });
+    var j = await r.json().catch(function () { return {}; });
+    return { status: r.status, data: j };
+  }
+
+  function showLogin(msg) {
+    setPw('');
+    $('box').hidden = true; $('login').hidden = false;
+    $('login-err').textContent = msg || ''; $('login-err').hidden = !msg;
+    $('pw').value = ''; $('pw').focus();
+  }
+
+  async function load() {
+    var res = await api('GET');
+    if (res.status === 401) return showLogin('비밀번호가 맞지 않아요.');
+    if (res.status !== 200) { $('login').hidden = true; $('box').hidden = false; $('box-err').textContent = res.data.error || '불러오지 못했어요.'; $('box-err').hidden = false; return; }
+    rows = res.data.rows || [];
+    $('login').hidden = true; $('box').hidden = false; $('box-err').hidden = true;
+    render();
+  }
+
+  function fmt(iso) {
+    var d = new Date(iso);
+    return d.toLocaleString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short', hour: '2-digit', minute: '2-digit' });
+  }
+  function isLate(r) { return r.status === '새 문의' && (Date.now() - new Date(r.created_at).getTime()) > 48 * 3600 * 1000; }
+
+  function render() {
+    var news = rows.filter(function (r) { return r.status === '새 문의'; }).length;
+    var lates = rows.filter(isLate).length;
+    $('new-count').textContent = news;
+    $('latebar').textContent = '답장 늦은 문의 ' + lates + '건 (48시간 넘음)';
+    $('latebar').hidden = lates === 0;
+    var shown = filter ? rows.filter(function (r) { return r.status === filter; }) : rows;
+    $('shown').textContent = (filter || '전체') + ' ' + shown.length + '건';
+    var list = $('list'); list.textContent = '';
+    if (!shown.length) {
+      var li = document.createElement('li'); li.className = 'empty';
+      li.textContent = rows.length ? '이 상태의 문의가 없어요.' : '아직 들어온 문의가 없어요. 사이트 문의 폼으로 테스트해 보세요.';
+      list.appendChild(li); return;
+    }
+    shown.forEach(function (r) {
+      var li = document.createElement('li'); li.className = 'card' + (isLate(r) ? ' late' : '');
+      var meta = document.createElement('div'); meta.className = 'meta'; meta.textContent = fmt(r.created_at) + (isLate(r) ? ' · 답장 늦음' : '');
+      var name = document.createElement('div'); name.className = 'name'; name.textContent = r.name;
+      var c = document.createElement('button'); c.type = 'button'; c.className = 'contact'; c.textContent = r.contact;
+      c.title = '눌러서 복사';
+      c.addEventListener('click', function () { copy(c, r.contact); });
+      li.append(meta, name, c);
+      if (r.message) { var m = document.createElement('p'); m.className = 'msgtext'; m.textContent = r.message; li.appendChild(m); }
+      var st = document.createElement('div'); st.className = 'status'; st.setAttribute('role', 'group'); st.setAttribute('aria-label', '처리 상태');
+      STATUSES.forEach(function (s) {
+        var b = document.createElement('button'); b.type = 'button'; b.textContent = s;
+        b.setAttribute('aria-pressed', String(r.status === s));
+        b.addEventListener('click', function () { setStatus(r.id, s, st); });
+        st.appendChild(b);
+      });
+      li.appendChild(st);
+      list.appendChild(li);
+    });
+  }
+
+  function copy(btn, text) {
+    var done = function () { var t = btn.textContent; btn.textContent = '복사했어요'; setTimeout(function () { btn.textContent = t; }, 1200); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { select(btn); });
+    } else { select(btn); }
+  }
+  function select(el) { var rg = document.createRange(); rg.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(rg); }
+
+  async function setStatus(id, s, group) {
+    group.querySelectorAll('button').forEach(function (b) { b.disabled = true; });
+    var res = await api('PATCH', { id: id, status: s });
+    if (res.status === 401) return showLogin('비밀번호가 맞지 않아요.');
+    if (res.status !== 200) { $('box-err').textContent = res.data.error || '바꾸지 못했어요.'; $('box-err').hidden = false; }
+    load();
+  }
+
+  $('login').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('pw').value; if (!v) return;
+    setPw(v); load();
+  });
+  $('reload').addEventListener('click', load);
+  document.querySelectorAll('.filters button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      filter = b.dataset.f;
+      document.querySelectorAll('.filters button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      render();
+    });
+  });
+
+  if (getPw()) load(); else $('pw').focus();
+})();
+</script>
+</body>
+</html>

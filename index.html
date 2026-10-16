@@ -181,6 +181,17 @@
   .strip a { flex: 0 0 auto; width: min(68vw, 260px); scroll-snap-align: start; border-radius: 14px; overflow: hidden; border: 1.5px solid #CFC2EC; background: #fff; }
   .voice-cards .strip-hint { font-weight: 400; margin: 0; font-size: .88rem; color: var(--muted); }
 
+  /* 미션 카드 */
+  section.block.missions { padding-top: 8px; }
+  .phases { list-style: none; padding: 0; margin: 28px 0 32px; display: grid; gap: 12px; }
+  .phases li { padding-left: 14px; border-left: 3px solid var(--violet); }
+  .phases b { display: block; font-family: var(--serif); color: var(--violet); font-size: 1.02rem; }
+  .day-strip a { width: min(58vw, 220px); display: flex; flex-direction: column; text-decoration: none; }
+  .day-strip img { aspect-ratio: 4 / 5; object-fit: cover; object-position: top; width: 100%; }
+  .day-strip span { padding: 10px 12px 12px; font-size: .9rem; line-height: 1.45; color: var(--text); }
+  .day-strip span b { display: block; font-family: var(--serif); color: var(--violet); font-size: 1rem; }
+  .missions .strip-hint { margin-top: 4px; font-size: .88rem; color: var(--muted); }
+
   /* 문의 */
   .ask { background: #fff; border-top: 1px solid var(--line); }
   .ask-grid { display: grid; gap: 40px; margin-top: 8px; }
@@ -240,6 +251,7 @@
     .voice-list { grid-template-columns: 1fr 1fr; gap: 0 56px; }
     .voice-list li:nth-last-child(2) { border-bottom: 1.5px solid #CFC2EC; }
     .strip { margin: 0; padding-left: 0; padding-right: 0; }
+    .phases { grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .sticky { display: none; }
     footer { padding-bottom: 56px; }
   }
@@ -322,6 +334,35 @@
           <p class="late">이미 시작했어도 괜찮아요. 지금 들어와서 보고 따라오시면 돼요.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="block missions" aria-labelledby="m-h">
+    <div class="wrap">
+      <h2 id="m-h">이런 걸 하루씩 만들어요</h2>
+      <p class="lead">실제 챌린지에서 진행한 미션 카드예요. 나를 찾는 글쓰기에서 시작해 캐릭터, 그림책, 굿즈까지 이어져요.</p>
+      <ol class="phases">
+        <li><b>DAY 01–05</b> AI와 대화하며 나를 소개하고, 독자와 콘텐츠 주제를 정해요</li>
+        <li><b>DAY 06–12</b> 나만의 캐릭터로 이모티콘, 인스타툰, 그림책, 굿즈를 만들어요</li>
+        <li><b>DAY 14–17</b> Gemini로 유튜브를 분석하고 오디오 오버뷰를 만들어요</li>
+      </ol>
+      <div class="strip day-strip" aria-label="날짜별 미션 카드">
+        <a href="images/day-01.webp" target="_blank" rel="noopener"><img src="images/day-01.webp" width="600" height="750" loading="lazy" alt="DAY 01 미션 카드: 나를 소개하는 문장"><span><b>DAY 1</b>나를 소개하는 문장</span></a>
+        <a href="images/day-02.webp" target="_blank" rel="noopener"><img src="images/day-02.webp" width="600" height="750" loading="lazy" alt="DAY 02 미션 카드: 나에게 맞는 현실적인 진로 3가지"><span><b>DAY 2</b>나에게 맞는 현실적인 진로 3가지</span></a>
+        <a href="images/day-03.webp" target="_blank" rel="noopener"><img src="images/day-03.webp" width="600" height="750" loading="lazy" alt="DAY 03 미션 카드: AI 데이터로 본 사용자 분석"><span><b>DAY 3</b>AI 데이터로 본 사용자 분석</span></a>
+        <a href="images/day-04.webp" target="_blank" rel="noopener"><img src="images/day-04.webp" width="600" height="750" loading="lazy" alt="DAY 04 미션 카드: 내 콘텐츠를 읽을 한 사람, 페르소나 정하기"><span><b>DAY 4</b>내 콘텐츠를 읽을 한 사람, 페르소나 정하기</span></a>
+        <a href="images/day-05.webp" target="_blank" rel="noopener"><img src="images/day-05.webp" width="600" height="750" loading="lazy" alt="DAY 05 미션 카드: 나의 콘텐츠 주제 만들기"><span><b>DAY 5</b>나의 콘텐츠 주제 만들기</span></a>
+        <a href="images/day-06.webp" target="_blank" rel="noopener"><img src="images/day-06.webp" width="600" height="750" loading="lazy" alt="DAY 06 미션 카드: 나만의 캐릭터 만들기"><span><b>DAY 6</b>나만의 캐릭터 만들기</span></a>
+        <a href="images/day-07.webp" target="_blank" rel="noopener"><img src="images/day-07.webp" width="600" height="750" loading="lazy" alt="DAY 07 미션 카드: 카카오 이모티콘 만들기"><span><b>DAY 7</b>카카오 이모티콘 만들기</span></a>
+        <a href="images/day-08.webp" target="_blank" rel="noopener"><img src="images/day-08.webp" width="600" height="750" loading="lazy" alt="DAY 08 미션 카드: 캐릭터 세계관 만들기"><span><b>DAY 8</b>캐릭터 세계관 만들기</span></a>
+        <a href="images/day-09.webp" target="_blank" rel="noopener"><img src="images/day-09.webp" width="600" height="750" loading="lazy" alt="DAY 09 미션 카드: 인스타툰 만들기"><span><b>DAY 9</b>인스타툰 만들기</span></a>
+        <a href="images/day-10.webp" target="_blank" rel="noopener"><img src="images/day-10.webp" width="600" height="750" loading="lazy" alt="DAY 10 미션 카드: 그림책 스토리 만들기"><span><b>DAY 10</b>그림책 스토리 만들기</span></a>
+        <a href="images/day-11.webp" target="_blank" rel="noopener"><img src="images/day-11.webp" width="600" height="750" loading="lazy" alt="DAY 11 미션 카드: AI story book 만들기"><span><b>DAY 11</b>AI story book 만들기</span></a>
+        <a href="images/day-12.webp" target="_blank" rel="noopener"><img src="images/day-12.webp" width="600" height="750" loading="lazy" alt="DAY 12 미션 카드: 굿즈 만들기"><span><b>DAY 12</b>굿즈 만들기</span></a>
+        <a href="images/day-14.webp" target="_blank" rel="noopener"><img src="images/day-14.webp" width="600" height="750" loading="lazy" alt="DAY 14 미션 카드: Gemini 유튜브 분석 콘텐츠"><span><b>DAY 14</b>Gemini 유튜브 분석 콘텐츠</span></a>
+        <a href="images/day-17.webp" target="_blank" rel="noopener"><img src="images/day-17.webp" width="600" height="750" loading="lazy" alt="DAY 17 미션 카드: Gemini Notebook AI 오디오 오버뷰 만들기"><span><b>DAY 17</b>Gemini Notebook AI 오디오 오버뷰 만들기</span></a>
+      </div>
+      <p class="strip-hint">옆으로 넘겨 보세요. 누르면 크게 볼 수 있어요.</p>
     </div>
   </section>
 

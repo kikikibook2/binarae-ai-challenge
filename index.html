@@ -162,6 +162,25 @@
   .cred ul { margin: 0; padding-left: 1.1em; }
   .cred a { color: var(--violet); font-weight: 600; }
 
+  /* 후기 */
+  .voices { background: var(--lilac); }
+  .voice-list { list-style: none; padding: 0; margin: 36px 0 0; display: grid; gap: 0; }
+  .voice-list li { padding: 28px 0; border-top: 1.5px solid #CFC2EC; }
+  .voice-list li:last-child { border-bottom: 1.5px solid #CFC2EC; }
+  .voice-list h3 { font-size: 1.3rem; margin-bottom: 10px; }
+  .voice-list blockquote { margin: 0; color: var(--text); }
+  .voice-list blockquote mark { background: linear-gradient(transparent 55%, rgba(242, 193, 78, .45) 55%); color: inherit; }
+  .voice-list .who-said { margin-top: 10px; font-size: .9rem; color: var(--muted); }
+  .voice-cards { margin-top: 40px; }
+  .voice-cards p { font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+  .strip {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+    padding-bottom: 12px; margin: 0 -20px; padding-left: 20px; padding-right: 20px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .strip a { flex: 0 0 auto; width: min(68vw, 260px); scroll-snap-align: start; border-radius: 14px; overflow: hidden; border: 1.5px solid #CFC2EC; background: #fff; }
+  .voice-cards .strip-hint { font-weight: 400; margin: 0; font-size: .88rem; color: var(--muted); }
+
   /* 문의 */
   .ask { background: #fff; border-top: 1px solid var(--line); }
   .ask-grid { display: grid; gap: 40px; margin-top: 8px; }
@@ -218,6 +237,9 @@
     .gain-list { grid-template-columns: 1fr 1fr; gap: 36px 56px; }
     .cred { grid-template-columns: repeat(3, 1fr); gap: 40px; }
     .ask-grid { grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: start; }
+    .voice-list { grid-template-columns: 1fr 1fr; gap: 0 56px; }
+    .voice-list li:nth-last-child(2) { border-bottom: 1.5px solid #CFC2EC; }
+    .strip { margin: 0; padding-left: 0; padding-right: 0; }
     .sticky { display: none; }
     footer { padding-bottom: 56px; }
   }
@@ -341,6 +363,47 @@
           <dt>전문 분야</dt>
           <dd>독서교육 · 글쓰기 · 출판 · AI 교육 콘텐츠<br><br>강의·출판·협업 문의<br><a href="mailto:kikikibook@naver.com">kikikibook@naver.com</a></dd>
         </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="block voices" aria-labelledby="v-h">
+    <div class="wrap">
+      <h2 id="v-h">먼저 들어 본 분들의 이야기</h2>
+      <p class="lead">빛나래샘 캔바 특강 수강생 후기예요.</p>
+      <ul class="voice-list">
+        <li>
+          <h3>"천천히 차분하게 설명해 주셔서 더 좋았어요"</h3>
+          <blockquote>무료 특강인데도 수준 높은 강의라 더욱 놀랐어요. 캔바를 제대로 배울 기회가 없었는데, 빛나래샘 덕분에 쉽게 배우고 실습까지 할 수 있어 정말 유익했습니다. <mark>느린 학습자도 따라갈 수 있도록 천천히 차분하게 설명해 주셔서 좋았어요.</mark></blockquote>
+          <p class="who-said">후기 2 · 캔바 특강 수강생</p>
+        </li>
+        <li>
+          <h3>"실습하며 배우니 더 쉬웠어요"</h3>
+          <blockquote>캔바의 다양한 기능을 눈으로만 보는 것이 아니라 함께 차근차근 해보는 시간이 정말 큰 도움이 되었습니다. 초보자의 눈높이에 맞춘 친절한 설명 덕분에 <mark>누구나 쉽게 자신만의 콘텐츠를 디자인할 수 있겠다는 용기를 얻었어요.</mark></blockquote>
+          <p class="who-said">후기 4 · 캔바 특강 수강생</p>
+        </li>
+        <li>
+          <h3>"기초부터 응용까지 한 번에"</h3>
+          <blockquote>캔바 기초부터 응용까지 알려 주셔서 시간 가는 줄 모르고 들었어요. 디테일한 설명과 고급 기능 소개까지 만족스러웠고, <mark>전자책, 웹페이지, 동영상 만들기까지 배울 수 있었어요.</mark> 정말 유익했습니다. 100일 챌린지도 잘 따라가 보고 싶어요.</blockquote>
+          <p class="who-said">후기 3 · 캔바 특강 수강생</p>
+        </li>
+        <li>
+          <h3>"보너스 강의까지 유익했어요"</h3>
+          <blockquote>캔바 수업도 좋았고, 보너스로 들은 제미나이·노트북LM 강의도 정말 유익했어요. <mark>실시간으로 보면서 들으니 더 쉽게 이해되고,</mark> 저에게 꼭 필요한 AI 프로그램을 배울 수 있어 좋았습니다.</blockquote>
+          <p class="who-said">후기 1 · 캔바 특강 수강생</p>
+        </li>
+      </ul>
+      <div class="voice-cards">
+        <p>후기 카드 원본</p>
+        <div class="strip" aria-label="후기 카드 이미지 모음">
+          <a href="images/review-summary.webp" target="_blank" rel="noopener"><img src="images/review-summary.webp" width="800" height="1000" loading="lazy" alt="한눈에 보는 수강생 반응: 초보자도 쉽게 따라갈 수 있었어요, 기초부터 응용까지 차근차근 배웠어요, 전자책·웹사이트·동영상까지 확장할 수 있었어요, 실습 중심이라 더 잘 이해되었어요, AI와 연결되는 흐름까지 유익했어요"></a>
+          <a href="images/review-1.webp" target="_blank" rel="noopener"><img src="images/review-1.webp" width="800" height="1000" loading="lazy" alt="후기 1 카드: 보너스 강의까지 유익했어요"></a>
+          <a href="images/review-2.webp" target="_blank" rel="noopener"><img src="images/review-2.webp" width="800" height="1000" loading="lazy" alt="후기 2 카드: 믿고 듣는 빛나래샘 강의"></a>
+          <a href="images/review-3.webp" target="_blank" rel="noopener"><img src="images/review-3.webp" width="800" height="1000" loading="lazy" alt="후기 3 카드: 기초부터 응용까지 한 번에"></a>
+          <a href="images/review-4.webp" target="_blank" rel="noopener"><img src="images/review-4.webp" width="800" height="1000" loading="lazy" alt="후기 4 카드: 실습하며 배우니 더 쉬웠어요"></a>
+          <a href="images/review-points.webp" target="_blank" rel="noopener"><img src="images/review-points.webp" width="800" height="1000" loading="lazy" alt="후기로 보는 만족 포인트: 초보자 친화적 설명, 실습 중심 강의, 활용 범위 확장, AI와 연결되는 흐름, 따뜻한 강의 분위기"></a>
+        </div>
+        <p class="strip-hint">옆으로 넘겨 보세요. 누르면 크게 볼 수 있어요.</p>
       </div>
     </div>
   </section>
